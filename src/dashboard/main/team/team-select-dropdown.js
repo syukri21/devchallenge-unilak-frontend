@@ -2,8 +2,9 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { graphql } from "react-apollo";
-import { getAllProjectName } from "../../../gql";
-
+import { getAllProjectName, getDescription } from "../../../gql";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Query } from "react-apollo";
 const styles = theme => ({
   container: {
     display: "flex",
@@ -19,6 +20,9 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  progress: {
+    margin: theme.spacing.unit * 2
   }
 });
 
@@ -31,6 +35,19 @@ class TeamSelectDropdown extends React.Component {
     this.setState({
       value: e.target.value
     });
+
+    <Query
+      query={getDescription}
+      variables={{
+        id: e.target.value
+      }}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return null;
+        if (error) return `Error!: ${error}`;
+        return console.log(data);
+      }}
+    </Query>;
   }
 
   componentDidMount() {
@@ -43,7 +60,7 @@ class TeamSelectDropdown extends React.Component {
     const { classes } = this.props;
     const { data } = this.props;
     if (data.loading) {
-      return <h1>tai</h1>;
+      return <CircularProgress className={classes.progress} />;
     } else {
       return (
         <TextField

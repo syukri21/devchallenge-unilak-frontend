@@ -9,7 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { graphql } from "react-apollo";
-import { getQueryTempUser } from "../../../gql";
+import { getQueryTempUser, getDescription } from "../../../gql";
 import Loader from "../loader/loader";
 import TeamSelectDropdown from "./team-select-dropdown";
 
@@ -17,6 +17,17 @@ class TeamProject extends React.Component {
   constructor() {
     super();
     this.tempGetter = this.tempGetter.bind(this);
+    this.state = {
+      description: "",
+      stakholder: "",
+      sprintnow: "",
+      startdate: "",
+      enddate: ""
+    };
+  }
+
+  getValue(e) {
+    console.log(e);
   }
 
   tempGetter() {
@@ -50,7 +61,10 @@ class TeamProject extends React.Component {
     return (
       <Card className={classes.teamProjectContainer}>
         <CardContent>
-          <CardHeader title="Project" action={<TeamSelectDropdown />} />
+          <CardHeader
+            title="Project"
+            action={<TeamSelectDropdown getValue={this.getValue} />}
+          />
           <CardContent className={classes.containerItem}>
             <Typography variant="subheading" className={classes.l}>
               Description

@@ -45,9 +45,22 @@ const getAllProjectName = gql`
   }
 `;
 
+const getDescription = gql`
+  query user($id: String) {
+    project(project: $id) {
+      description
+      stakeholder
+      sprint
+      stardate
+      enddate
+    }
+  }
+`;
+
 export {
   getQueryTempUser,
   getQueueAllProjects,
   getBestProduct,
-  getAllProjectName
+  getAllProjectName,
+  getDescription
 };
