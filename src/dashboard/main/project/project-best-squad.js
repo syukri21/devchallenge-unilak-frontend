@@ -1,3 +1,4 @@
+
 import React from "react"
 import Card from "@material-ui/core/Card"
 import CardHeader from "@material-ui/core/CardHeader"
@@ -9,8 +10,9 @@ import TableRow from "@material-ui/core/TableRow";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import CardActions from "@material-ui/core/CardActions";
-
-
+import {graphql} from "react-apollo";
+import {getBestProduct} from "../../../gql"
+import Loader from "../loader/loader"
 const temp = [
 	{
 		nama : "Squad 1 - Myindihome",
@@ -36,16 +38,40 @@ const temp = [
 ]
 
 class BestSquad extends React.Component {
+
+	bestSquadDisplay(){
+		let {data} = this.props
+		console.log(data);
+		if(data.loading){
+			return <Loader />
+		}else{
+			return(
+			<TableBody>
+	          {data.projects.map((e, i) => (
+	            <TableRow 
+	            	key={i} 
+	            	style={{background: i%2===0 ? "lightskyblue" : "white" }} 
+	            	>				            
+	              <TableCell numeric={true} padding="dense" >{i}</TableCell>
+	              <TableCell>{e.projectnama}</TableCell>
+	              <TableCell numeric={true}   padding="dense" >{e.rating}</TableCell>
+	            </TableRow>
+	          ))}
+	        </TableBody>
+	        );
+		}
+	}
+
 	render(){
 		const classes = this.props.classes;
-
 		return(
+
 			<Card  className={classes.bsquad}  >
 				<CardHeader 
 					title="Best Squad Performance"
 					>
 				</CardHeader>
-				<CardContent>
+				<CardContent   >
 					<Table>
 				        <TableHead>
 				          <TableRow>
@@ -54,18 +80,7 @@ class BestSquad extends React.Component {
 				            <TableCell numeric={true}   padding="dense" >Rate</TableCell>
 				          </TableRow>
 				        </TableHead>
-				        <TableBody>
-				          {temp.map((e, i) => (
-				            <TableRow 
-				            	key={i} 
-				            	style={{background: i%2===0 ? "lightskyblue" : "white" }} 
-				            	>				            
-				              <TableCell numeric={true} padding="dense" >{i}</TableCell>
-				              <TableCell>{e.nama}</TableCell>
-				              <TableCell numeric={true}   padding="dense" >{e.rate}</TableCell>
-				            </TableRow>
-				          ))}
-				        </TableBody>
+				        	{this.bestSquadDisplay()}
 				      </Table>
 				</CardContent>
 				<CardActions className={classes.actions}>
@@ -77,4 +92,4 @@ class BestSquad extends React.Component {
 }
 
 
-export default BestSquad;
+export default graphql(getBestProduct)(BestSquad);

@@ -49,7 +49,7 @@ class Schedule extends React.Component {
 					</Typography>
 					<CardContent className={classes.scheduleDetail} >
 						<div>
-							<div>
+							<div className="chip-">
 								<Chip className="chip" label="1" />
 							</div>
 							<Typography
@@ -79,7 +79,7 @@ class Schedule extends React.Component {
 					</CardContent>
 					<CardContent className={classes.scheduleDetail} >
 						<div>
-							<div>
+							<div className="chip-container" > 
 								<Chip className="chip" label="1" />
 							</div>
 							<Typography

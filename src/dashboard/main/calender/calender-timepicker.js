@@ -2,11 +2,6 @@ import React from "react"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import CardHeader from "@material-ui/core/CardHeader"
-import Table from "@material-ui/core/Table"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
-import TableCell from "@material-ui/core/TableCell"
-import TableBody from "@material-ui/core/TableBody"
 import Calendar from "react-calendar"
 import TextField from "@material-ui/core/TextField"
 import moment from "moment";
@@ -21,16 +16,20 @@ class Timepicker extends React.Component {
 			date : moment().format("YYYY-MM-DD[T]HH:mm:ss")
 		}
 		this.changeDate = this.changeDate.bind(this);
+		this.onChange = this.onChange.bind(this);
 	}
 	
 	changeDate (e){
 		this.setState({
 			date :e.target.value
-
 		});
-
 	}
 
+	onChange (e) {
+		this.setState({
+			date : moment(e).format("YYYY-MM-DD[T]HH:mm:ss")
+		})
+	}
 	render(){
 		const classes = this.props.classes
 		console.log(this.state.date)
@@ -49,7 +48,7 @@ class Timepicker extends React.Component {
 				        label="Date"
 				        type="datetime-local"
 				        onChange={e  => this.changeDate(e)}
-				        defaultValue={this.state.date}
+				        value={this.state.date}
 				        className={classes.textField}
 				        InputLabelProps={{
 				          shrink: true,
@@ -59,6 +58,8 @@ class Timepicker extends React.Component {
 				<CardContent className={classes.calenderContainer} >
 					<Calendar 
 						activeStartDate = {moment(this.state.date).toDate()}
+						value = {this.state.data}
+						onChange = {e => this.onChange(e)}
 
 					/>
 				</CardContent>

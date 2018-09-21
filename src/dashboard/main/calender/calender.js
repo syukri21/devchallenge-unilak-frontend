@@ -1,9 +1,6 @@
 import React from "react";
 import {withStyles} from "@material-ui/core/styles";
 import {calenderStyles} from "../../../styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import Timepicker from "./calender-timepicker";
 import Schedule from "./calender-schedule";
 
