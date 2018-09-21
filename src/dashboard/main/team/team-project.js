@@ -22,9 +22,7 @@ class TeamProject extends React.Component {
   tempGetter() {
     let data = this.props.data;
     if (data.loading) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     } else {
       return (
         <TableBody>
@@ -127,7 +125,7 @@ class TeamProject extends React.Component {
         </CardContent>
         <CardContent>
           <CardHeader title="Member" />
-          <CardContent>
+          <CardContent style={{ position: "relative" }}>
             <Table>
               <TableHead>
                 <TableRow>

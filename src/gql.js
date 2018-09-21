@@ -33,8 +33,7 @@ const getBestProduct = gql`
       projectnama
       rating
     }
-  } 
+  }
 `;
-
 
 export { getQueryTempUser, getQueueAllProjects, getBestProduct };
