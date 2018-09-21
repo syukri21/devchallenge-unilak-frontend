@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
@@ -12,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { graphql } from "react-apollo";
 import { getQueryTempUser } from "../../../gql";
 import Loader from "../loader/loader";
+import TeamSelectDropdown from "./team-select-dropdown";
 
 class TeamProject extends React.Component {
   constructor() {
@@ -50,17 +50,7 @@ class TeamProject extends React.Component {
     return (
       <Card className={classes.teamProjectContainer}>
         <CardContent>
-          <CardHeader
-            title="Project"
-            action={
-              <TextField
-                id="userid"
-                label="Team"
-                defaultValue="My Indihome Consumen"
-                margin="normal"
-              />
-            }
-          />
+          <CardHeader title="Project" action={<TeamSelectDropdown />} />
           <CardContent className={classes.containerItem}>
             <Typography variant="subheading" className={classes.l}>
               Description

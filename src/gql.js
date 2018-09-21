@@ -36,4 +36,18 @@ const getBestProduct = gql`
   }
 `;
 
-export { getQueryTempUser, getQueueAllProjects, getBestProduct };
+const getAllProjectName = gql`
+  {
+    projects {
+      project
+      projectnama
+    }
+  }
+`;
+
+export {
+  getQueryTempUser,
+  getQueueAllProjects,
+  getBestProduct,
+  getAllProjectName
+};
