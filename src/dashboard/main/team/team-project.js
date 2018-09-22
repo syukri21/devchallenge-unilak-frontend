@@ -9,20 +9,24 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { graphql, compose } from "react-apollo";
-import { getQueryTempUser, getDescription, getOneUser, getUidProject } from "../../../gql";
+import {
+  getQueryTempUser,
+  getDescription,
+  getOneUser,
+  getUidProject
+} from "../../../gql";
 import Loader from "../loader/loader";
 import TeamSelectDropdown from "./team-select-dropdown";
 import TeamDescription from "./team-description";
-import {Query} from "react-apollo";
-
+import { Query } from "react-apollo";
 
 class TeamProject extends React.Component {
   constructor() {
     super();
     this.tempGetter = this.tempGetter.bind(this);
     this.state = {
-      value : null,
-      data : null
+      value: null,
+      data: null
     };
     this.getValue = this.getValue.bind(this);
     this.getUid = this.getUid.bind(this);
@@ -30,76 +34,43 @@ class TeamProject extends React.Component {
 
   getValue(e) {
     this.setState({
-      value : e
+      value: e
     });
   }
 
-
-
-
-  getUid(data){
-    if(data.project === null)return <span>Choose Project ..</span>
-    return(
-        data.project.uid.map((e, i) => 
-       <Query 
-          query={getOneUser}
-          variables={{
-                "id": "papamintasaham"
-              }}
-            >
-            {
-              ({loading, data}) => 
-              ( 
-              <TableRow key={i} >
-                {console.log(e)}
-              </TableRow>
-              )
-            }
-        </Query>
-         )
-    )
-
-    }
-
+  getUid(data) {
+    if (data.project === null) return <span>Choose Project ..</span>;
+    return data.project.uid.map((e, i) => (
+      <Query
+        key={i}
+        query={getOneUser}
+        variables={{
+          id: "papamintasaham"
+        }}
+      >
+        {({ loading, data }) => (
+          <TableRow style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
+            <TableCell>{i + 1}</TableCell>
+            <TableCell>{e.namalengkap}</TableCell>
+            <TableCell>{e.stream}</TableCell>
+          </TableRow>
+        )}
+      </Query>
+    ));
+  }
 
   tempGetter() {
-      return (
-        <TableBody>
-          <Query
-          query={getUidProject}
-          variables={{
-            "id": this.state.value
-          }}
-          >
-          {({loading, data, error}) => {
-            if (loading) return <Typography variant="caption" > loading... </Typography>
-            return (
-              <div>
-              {this.getUid(data)}
-              </div>
-            )
-          }
-          }
-          </Query>
-        </TableBody>
-      );
-    }
-  
-
-  render() {
-    const classes = this.props.classes;
     return (
-      <Card className={classes.teamProjectContainer}>
-        <CardContent  >
-          <CardHeader
-            title="Project"
-            action={<TeamSelectDropdown getValue={this.getValue} />}
-          />
-          <TeamDescription classed={classes} passValue={this.state.value} />
-        </CardContent>
-        <CardContent>
-          <CardHeader title="Member" />
-          <CardContent style={{ position: "relative" }}>
+      <Query
+        query={getUidProject}
+        variables={{
+          id: this.state.value
+        }}
+      >
+        {({ loading, data, error }) => {
+          if (loading)
+            return <Typography variant="caption"> loading... </Typography>;
+          return (
             <Table>
               <TableHead>
                 <TableRow>
@@ -110,8 +81,29 @@ class TeamProject extends React.Component {
                   <TableCell>Stream</TableCell>
                 </TableRow>
               </TableHead>
-              {this.tempGetter()}
+              {this.getUid(data)}
             </Table>
+          );
+        }}
+      </Query>
+    );
+  }
+
+  render() {
+    const classes = this.props.classes;
+    return (
+      <Card className={classes.teamProjectContainer}>
+        <CardContent>
+          <CardHeader
+            title="Project"
+            action={<TeamSelectDropdown getValue={this.getValue} />}
+          />
+          <TeamDescription classed={classes} passValue={this.state.value} />
+        </CardContent>
+        <CardContent>
+          <CardHeader title="Member" />
+          <CardContent style={{ position: "relative" }}>
+            {this.tempGetter()}
           </CardContent>
         </CardContent>
       </Card>

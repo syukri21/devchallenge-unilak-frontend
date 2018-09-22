@@ -15,7 +15,7 @@ class Tables extends React.Component {
   getQueueAllProjectsDisplay() {
     let data = this.props.data;
     if (data.loading) {
-      return <Loader />
+      return <Loader />;
     } else {
       return (
         <TableBody>

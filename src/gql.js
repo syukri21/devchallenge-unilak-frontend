@@ -45,9 +45,6 @@ const getAllProjectName = gql`
   }
 `;
 
-
-
-
 const getDescription = gql`
   query project($id: String) {
     project(project: $id) {
@@ -60,26 +57,25 @@ const getDescription = gql`
   }
 `;
 
-
 const getOneUser = gql`
-query user($id: String) {
-user(user: $id){
-  namalengkap
-  stream
-}
-}
-
+  query user($id: String) {
+    user(user: $id) {
+      namalengkap
+      stream
+    }
+  }
 `;
 
 const getUidProject = gql`
-query project($id: String) {
-  project(project: $id) {
-    uid {
-  user
+  query user($id: String) {
+    project(project: $id) {
+      uid {
+        namalengkap
+        stream
+      }
     }
   }
-}
-`
+`;
 
 export {
   getQueryTempUser,
