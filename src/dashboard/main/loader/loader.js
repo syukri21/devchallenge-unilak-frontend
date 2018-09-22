@@ -8,7 +8,7 @@ class Loader extends React.Component {
  		const {classes} = this.props;
 		return(	
 			<TableBody className={classes.root}>
-		        <LinearProgress
+		        <LinearProgress 
 		            classes={{
 		              colorPrimary: classes.colorPrimary,
 		              barColorPrimary: classes.barColorPrimary

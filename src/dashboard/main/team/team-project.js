@@ -8,27 +8,31 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import { getQueryTempUser, getDescription } from "../../../gql";
 import Loader from "../loader/loader";
 import TeamSelectDropdown from "./team-select-dropdown";
+import TeamDescription from "./team-description";
+import {Query} from "react-apollo";
+
 
 class TeamProject extends React.Component {
   constructor() {
     super();
     this.tempGetter = this.tempGetter.bind(this);
     this.state = {
-      description: "",
-      stakholder: "",
-      sprintnow: "",
-      startdate: "",
-      enddate: ""
+      value : null,
+      data : null
     };
+    this.getValue = this.getValue.bind(this);
   }
 
   getValue(e) {
-    console.log(e);
+    this.setState({
+      value : e
+    });
   }
+
 
   tempGetter() {
     let data = this.props.data;
@@ -37,6 +41,7 @@ class TeamProject extends React.Component {
     } else {
       return (
         <TableBody>
+ 
           {data.users.map((e, i) => (
             <TableRow
               key={i}
@@ -65,67 +70,7 @@ class TeamProject extends React.Component {
             title="Project"
             action={<TeamSelectDropdown getValue={this.getValue} />}
           />
-          <CardContent className={classes.containerItem}>
-            <Typography variant="subheading" className={classes.l}>
-              Description
-            </Typography>
-            <Typography variant="subheading" className={classes.m}>
-              {" "}
-              :{" "}
-            </Typography>
-            <Typography variant="subheading" className={classes.r}>
-              {" "}
-              This is a sample description about project{" "}
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.containerItem}>
-            <Typography variant="subheading" className={classes.l}>
-              Stack Holder
-            </Typography>
-            <Typography variant="subheading" className={classes.m}>
-              {" "}
-              :{" "}
-            </Typography>
-            <Typography variant="subheading" className={classes.r}>
-              DEGM
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.containerItem}>
-            <Typography variant="subheading" className={classes.l}>
-              Sprint Now
-            </Typography>
-            <Typography variant="subheading" className={classes.m}>
-              {" "}
-              :{" "}
-            </Typography>
-            <Typography variant="subheading" className={classes.r}>
-              4
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.containerItem}>
-            <Typography variant="subheading" className={classes.l}>
-              Start Date
-            </Typography>
-            <Typography variant="subheading" className={classes.m}>
-              {" "}
-              :{" "}
-            </Typography>
-            <Typography variant="subheading" className={classes.r}>
-              06 December 2018
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.containerItem}>
-            <Typography variant="subheading" className={classes.l}>
-              End Date
-            </Typography>
-            <Typography variant="subheading" className={classes.m}>
-              {" "}
-              :{" "}
-            </Typography>
-            <Typography variant="subheading" className={classes.r}>
-              22 December 2018
-            </Typography>
-          </CardContent>
+          <TeamDescription classed={classes} passValue={this.state.value} />
         </CardContent>
         <CardContent>
           <CardHeader title="Member" />

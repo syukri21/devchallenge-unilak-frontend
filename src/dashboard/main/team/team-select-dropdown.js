@@ -2,9 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { graphql } from "react-apollo";
-import { getAllProjectName, getDescription } from "../../../gql";
+import { getAllProjectName   } from "../../../gql";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { Query } from "react-apollo";
 const styles = theme => ({
   container: {
     display: "flex",
@@ -32,22 +31,10 @@ class TeamSelectDropdown extends React.Component {
   };
 
   handleChange(e) {
+    this.props.getValue(e.target.value)
     this.setState({
       value: e.target.value
     });
-
-    <Query
-      query={getDescription}
-      variables={{
-        id: e.target.value
-      }}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return null;
-        if (error) return `Error!: ${error}`;
-        return console.log(data);
-      }}
-    </Query>;
   }
 
   componentDidMount() {
@@ -66,8 +53,9 @@ class TeamSelectDropdown extends React.Component {
         <TextField
           id="standard-select-currency-native"
           select
-          label="Pilih Project"
+          label="Project"
           className={classes.textField}
+         helperText="choose a project"
           value={this.state.value}
           onChange={e => this.handleChange(e)}
           SelectProps={{

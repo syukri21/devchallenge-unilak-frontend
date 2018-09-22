@@ -12,28 +12,7 @@ import CardActions from "@material-ui/core/CardActions";
 import { graphql } from "react-apollo";
 import { getBestProduct } from "../../../gql";
 import Loader from "../loader/loader";
-const temp = [
-  {
-    nama: "Myindihome",
-    rate: 3
-  },
-  {
-    nama: "Sobat BUMN",
-    rate: 1
-  },
-  {
-    nama: "Open Trip",
-    rate: 2
-  },
-  {
-    nama: "ODP Hunter",
-    rate: 5
-  },
-  {
-    nama: "SIIS",
-    rate: 6
-  }
-];
+
 
 class BestProduct extends React.Component {
   bestProductDisplay() {

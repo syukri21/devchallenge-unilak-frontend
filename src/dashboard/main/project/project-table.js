@@ -9,13 +9,11 @@ import TableRow from "@material-ui/core/TableRow";
 import CardContent from "@material-ui/core/CardContent";
 import { graphql } from "react-apollo";
 import { getQueueAllProjects } from "../../../gql";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import Loader from "../loader/loader";
 
 class Tables extends React.Component {
   getQueueAllProjectsDisplay() {
     let data = this.props.data;
-    const classes = this.props.classes;
     if (data.loading) {
       return <Loader />
     } else {

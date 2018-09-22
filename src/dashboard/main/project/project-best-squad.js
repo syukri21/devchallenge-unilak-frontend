@@ -16,7 +16,6 @@ import Loader from "../loader/loader";
 class BestSquad extends React.Component {
   bestSquadDisplay() {
     let { data } = this.props;
-    console.log(data);
     if (data.loading) {
       return <Loader />;
     } else {
