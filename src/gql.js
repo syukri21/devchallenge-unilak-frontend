@@ -45,8 +45,11 @@ const getAllProjectName = gql`
   }
 `;
 
+
+
+
 const getDescription = gql`
-  query user($id: String) {
+  query project($id: String) {
     project(project: $id) {
       description
       stakeholder
@@ -57,10 +60,33 @@ const getDescription = gql`
   }
 `;
 
+
+const getOneUser = gql`
+query user($id: String) {
+user(user: $id){
+  namalengkap
+  stream
+}
+}
+
+`;
+
+const getUidProject = gql`
+query project($id: String) {
+  project(project: $id) {
+    uid {
+  user
+    }
+  }
+}
+`
+
 export {
   getQueryTempUser,
   getQueueAllProjects,
   getBestProduct,
   getAllProjectName,
-  getDescription
+  getDescription,
+  getOneUser,
+  getUidProject
 };

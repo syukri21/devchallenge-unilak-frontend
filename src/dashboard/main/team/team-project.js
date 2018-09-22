@@ -9,7 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { graphql, compose } from "react-apollo";
-import { getQueryTempUser, getDescription } from "../../../gql";
+import { getQueryTempUser, getDescription, getOneUser, getUidProject } from "../../../gql";
 import Loader from "../loader/loader";
 import TeamSelectDropdown from "./team-select-dropdown";
 import TeamDescription from "./team-description";
@@ -25,6 +25,7 @@ class TeamProject extends React.Component {
       data : null
     };
     this.getValue = this.getValue.bind(this);
+    this.getUid = this.getUid.bind(this);
   }
 
   getValue(e) {
@@ -34,38 +35,62 @@ class TeamProject extends React.Component {
   }
 
 
-  tempGetter() {
-    let data = this.props.data;
-    if (data.loading) {
-      return <Loader />;
-    } else {
-      return (
-        <TableBody>
- 
-          {data.users.map((e, i) => (
-            <TableRow
-              key={i}
-              style={{
-                background: i % 2 === 0 ? "lightskyblue" : "white"
+
+
+  getUid(data){
+    if(data.project === null)return <span>Choose Project ..</span>
+    return(
+        data.project.uid.map((e, i) => 
+       <Query 
+          query={getOneUser}
+          variables={{
+                "id": "papamintasaham"
               }}
             >
-              <TableCell numeric={true} padding="dense">
-                {i + 1}
-              </TableCell>
-              <TableCell>{e.namalengkap}</TableCell>
-              <TableCell>{e.stream}</TableCell>
-            </TableRow>
-          ))}
+            {
+              ({loading, data}) => 
+              ( 
+              <TableRow key={i} >
+                {console.log(e)}
+              </TableRow>
+              )
+            }
+        </Query>
+         )
+    )
+
+    }
+
+
+  tempGetter() {
+      return (
+        <TableBody>
+          <Query
+          query={getUidProject}
+          variables={{
+            "id": this.state.value
+          }}
+          >
+          {({loading, data, error}) => {
+            if (loading) return <Typography variant="caption" > loading... </Typography>
+            return (
+              <div>
+              {this.getUid(data)}
+              </div>
+            )
+          }
+          }
+          </Query>
         </TableBody>
       );
     }
-  }
+  
 
   render() {
     const classes = this.props.classes;
     return (
       <Card className={classes.teamProjectContainer}>
-        <CardContent>
+        <CardContent  >
           <CardHeader
             title="Project"
             action={<TeamSelectDropdown getValue={this.getValue} />}

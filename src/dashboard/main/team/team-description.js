@@ -59,7 +59,6 @@ class TeamDescription extends React.Component {
 								<TableCell> {!loading && data.project != null && data.project.enddate} </TableCell>
 							</TableRow>
 					</TableBody>
-				     	
 					);
 			    }}
 			</Query>
