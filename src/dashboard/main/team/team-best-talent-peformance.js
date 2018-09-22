@@ -7,38 +7,43 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import CardContent from "@material-ui/core/CardContent";
-
-const temp = [
-  {
-    nama: "Budi Artanto",
-    stream: "Backend",
-    pointBurn: 105,
-    pointRemaining: 30,
-    pointQueue: 30
-  },
-  {
-    nama: "Tono Budiman",
-    stream: "Backend",
-    pointBurn: 102,
-    pointRemaining: 32,
-    pointQueue: 12
-  },
-  {
-    nama: "Wawan Aja",
-    stream: "Frontend",
-    pointBurn: 109,
-    pointRemaining: 35,
-    pointQueue: 25
-  }
-];
+import {Query} from "react-apollo";
+import {getUidProject} from "../../../gql"
+import Typography from "@material-ui/core/Typography"
 
 class BestTalentPeformance extends React.Component {
-  render() {
+
+
+  constructor(){
+    super()
+    this.state = {
+      data : null
+    }
+  }
+
+
+ componentWillReceiveProps(nextProps) {
+   this.setState({
+    data : nextProps.passUid
+   });
+ }
+
+
+
+  getTable(){
+
     return (
-      <Card>
-        <CardHeader title="Best Talent Peformance" />
-        <CardContent>
-          <Table>
+      <Query
+        query={getUidProject}
+        variables={{
+          "id": this.state.data
+        }}
+      >
+        {({ loading, data, error }) => {
+          if (loading)
+          return <Typography variant="caption"> loading... </Typography>;
+          return (
+                   <Table>
             <TableHead>
               <TableRow>
                 <TableCell numeric={true} padding="dense">
@@ -58,7 +63,8 @@ class BestTalentPeformance extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {temp.map((e, i) => (
+            
+            { data.project != null ? data.project.uid.map((e, i) => (
                 <TableRow
                   key={i}
                   style={{ background: i % 2 === 0 ? "lightskyblue" : "white" }}
@@ -66,21 +72,34 @@ class BestTalentPeformance extends React.Component {
                   <TableCell numeric={true} padding="dense">
                     {i + 1}
                   </TableCell>
-                  <TableCell>{e.nama}</TableCell>
+                  <TableCell>{e.namalengkap}</TableCell>
                   <TableCell>{e.stream}</TableCell>
                   <TableCell numeric={true} padding="dense">
-                    {e.pointBurn}
+                    {e.pointburn}
                   </TableCell>
                   <TableCell numeric={true} padding="dense">
-                    {e.pointRemaining}
+                    {e.pointremain}
                   </TableCell>
                   <TableCell numeric={true} padding="dense">
-                    {e.pointQueue}
+                    {e.pointqueue}
                   </TableCell>
                 </TableRow>
-              ))}
+              )) : <Typography variant="caption" >Choose Project</Typography>}
             </TableBody>
           </Table>
+          );
+        }}
+      </Query>
+    );
+  }
+
+
+  render() {
+    return (
+      <Card>
+        <CardHeader title="Best Talent Peformance" />
+        <CardContent>
+        {this.getTable()}
         </CardContent>
       </Card>
     );

@@ -72,10 +72,15 @@ const getUidProject = gql`
       uid {
         namalengkap
         stream
+        pointburn
+        pointqueue
+        pointremain
       }
     }
   }
 `;
+
+
 
 export {
   getQueryTempUser,
@@ -84,5 +89,6 @@ export {
   getAllProjectName,
   getDescription,
   getOneUser,
-  getUidProject
+  getUidProject,
+  
 };

@@ -6,12 +6,29 @@ import TeamProject from "./team-project";
 
 
 class Team extends React.Component {
+
+
+
+	constructor(){
+		super()
+		this.state = {
+			data : null
+		}
+		this.getUid = this.getUid.bind(this)
+	}
+
+	getUid(e){
+		this.setState({
+			data : e
+		});
+	}
+
 	render(){
 		const {classes} = this.props
 		return(
 			<div className={classes.grid}>
-				<TeamProject classes={classes} />
-				<BestTalentPeformance classes={classes}  />				
+				<TeamProject classes={classes}  getUid={(e) => this.getUid(e)} />
+				<BestTalentPeformance classes={classes} passUid={this.state.data}/>				
 			</div>
 		);
 	}

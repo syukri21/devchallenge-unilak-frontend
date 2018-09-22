@@ -36,27 +36,21 @@ class TeamProject extends React.Component {
     this.setState({
       value: e
     });
+    this.props.getUid(e);
   }
 
   getUid(data) {
-    if (data.project === null) return <span>Choose Project ..</span>;
-    return data.project.uid.map((e, i) => (
-      <Query
-        key={i}
-        query={getOneUser}
-        variables={{
-          id: "papamintasaham"
-        }}
-      >
-        {({ loading, data }) => (
-          <TableRow style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
-            <TableCell>{i + 1}</TableCell>
-            <TableCell>{e.namalengkap}</TableCell>
-            <TableCell>{e.stream}</TableCell>
-          </TableRow>
-        )}
-      </Query>
-    ));
+    if (data.project === null) {
+      return <Typography variant="caption" >Choose Project ..</Typography>;
+    } else {
+      return data.project.uid.map((e, i) => (
+        <TableRow key={i} style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
+          <TableCell>{i + 1}</TableCell>
+          <TableCell>{e.namalengkap}</TableCell>
+          <TableCell>{e.stream}</TableCell>
+        </TableRow>
+      ));
+    }
   }
 
   tempGetter() {
