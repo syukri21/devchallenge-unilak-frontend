@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import {Query} from "react-apollo";
 import {getUidProject} from "../../../gql"
 import Typography from "@material-ui/core/Typography"
+import Button from "@material-ui/core/Button"
 
 class BestTalentPeformance extends React.Component {
 
@@ -72,7 +73,7 @@ class BestTalentPeformance extends React.Component {
                   <TableCell numeric={true} padding="dense">
                     {i + 1}
                   </TableCell>
-                  <TableCell>{e.namalengkap}</TableCell>
+                  <TableCell><Button onClick={() => this.props.displayMember(true)} size="small" >{e.namalengkap}</Button></TableCell>
                   <TableCell>{e.stream}</TableCell>
                   <TableCell numeric={true} padding="dense">
                     {e.pointburn}

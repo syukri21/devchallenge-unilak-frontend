@@ -92,6 +92,22 @@ const getDateEvent =  gql`
 
 `;
 
+const addEvent = gql`
+
+mutation addEvent($id: String, $date: Date, $description: String) {
+  addEvent(
+    eventid: $id,
+    date: $date,
+    description: $description
+  ){
+date
+    
+  }
+
+}
+
+`;
+
 
 
 export {
@@ -102,6 +118,7 @@ export {
   getDescription,
   getOneUser,
   getUidProject,
-  getDateEvent
+  getDateEvent,
+  addEvent
   
 };

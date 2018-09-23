@@ -4,10 +4,10 @@ import CardContent from "@material-ui/core/CardContent"
 import CardHeader from "@material-ui/core/CardHeader"
 import TextField from "@material-ui/core/TextField"
 import moment from "moment";
-import Calendar from "react-calendar";
 import CalendarEvent from "./calendar-event.js";
 class Timepicker extends React.Component {
 
+	
 
 
 	constructor (){
@@ -21,7 +21,7 @@ class Timepicker extends React.Component {
 	
 	changeDate (e){
 		this.setState({
-			date :e.target.value
+			date :moment(e.target.value).format("YYYY-MM-DD[T]HH:mm:ss")
 		});
 	}
 
