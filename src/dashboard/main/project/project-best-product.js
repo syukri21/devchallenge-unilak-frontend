@@ -21,6 +21,18 @@ class BestProduct extends React.Component {
       return <Loader />;
     } else {
       return (
+        <Table>
+          <TableHead>
+              <TableRow>
+                <TableCell numeric={true} padding="dense">
+                  No
+                </TableCell>
+                <TableCell>Nama Project</TableCell>
+                <TableCell numeric={true} padding="dense">
+                  Rate
+                </TableCell>
+              </TableRow>
+            </TableHead>
         <TableBody>
           {data.projects.map((e, i) => (
             <TableRow
@@ -37,29 +49,21 @@ class BestProduct extends React.Component {
             </TableRow>
           ))}
         </TableBody>
+          </Table>
       );
     }
   }
+
+
+
+
   render() {
     const classes = this.props.classes;
     return (
       <Card className={classes.bproduck}>
         <CardHeader title="Best Product Performance" />
         <CardContent style={{ position: "relative" }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell numeric={true} padding="dense">
-                  No
-                </TableCell>
-                <TableCell>Nama Project</TableCell>
-                <TableCell numeric={true} padding="dense">
-                  Rate
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            {this.bestProductDisplay()}
-          </Table>
+                      {this.bestProductDisplay()}
         </CardContent>
         <CardActions className={classes.actions}>
           <Button variant="raised" color="primary">

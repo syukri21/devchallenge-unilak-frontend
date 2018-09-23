@@ -1,17 +1,11 @@
 import React from "react";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { ApolloConsumer } from "react-apollo";
 import { getDescription } from "../../../gql";
 import { Query } from "react-apollo";
 
-const styles = theme => ({});
 
 class TeamDescription extends React.Component {
   state = {
@@ -21,7 +15,7 @@ class TeamDescription extends React.Component {
 
   displayTeamDescription() {
     return (
-      <div>
+      <Table>
         <Query query={getDescription} variables={{ id: this.state.value }}>
           {({ loading, error, data, refetch, networkStatus }) => {
             return (
@@ -93,7 +87,7 @@ class TeamDescription extends React.Component {
             );
           }}
         </Query>
-      </div>
+      </Table>
     );
   }
 
@@ -105,10 +99,9 @@ class TeamDescription extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
-        <Table>{this.displayTeamDescription()}</Table>
+        {this.displayTeamDescription()}
       </div>
     );
   }

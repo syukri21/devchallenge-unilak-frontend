@@ -20,7 +20,19 @@ class BestSquad extends React.Component {
       return <Loader />;
     } else {
       return (
-        <TableBody>
+               <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell numeric={true} padding="dense">
+                  No
+                </TableCell>
+                <TableCell>Nama Project</TableCell>
+                <TableCell numeric={true} padding="dense">
+                  Rate
+                </TableCell>
+              </TableRow>
+            </TableHead>
+                <TableBody>
           {data.projects.map((e, i) => (
             <TableRow
               key={i}
@@ -36,6 +48,8 @@ class BestSquad extends React.Component {
             </TableRow>
           ))}
         </TableBody>
+              </Table>
+
       );
     }
   }
@@ -46,20 +60,7 @@ class BestSquad extends React.Component {
       <Card className={classes.bsquad}>
         <CardHeader title="Best Squad Performance" />
         <CardContent style={{position: "relative"}} >
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell numeric={true} padding="dense">
-                  No
-                </TableCell>
-                <TableCell>Nama Project</TableCell>
-                <TableCell numeric={true} padding="dense">
-                  Rate
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            {this.bestSquadDisplay()}
-          </Table>
+          {this.bestSquadDisplay()}
         </CardContent>
         <CardActions className={classes.actions}>
           <Button variant="raised" color="primary">

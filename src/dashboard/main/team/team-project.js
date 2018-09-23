@@ -4,21 +4,19 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { graphql, compose } from "react-apollo";
+import TableBody from "@material-ui/core/TableBody";
+import { graphql } from "react-apollo";
 import {
   getQueryTempUser,
-  getDescription,
-  getOneUser,
   getUidProject
 } from "../../../gql";
-import Loader from "../loader/loader";
 import TeamSelectDropdown from "./team-select-dropdown";
 import TeamDescription from "./team-description";
 import { Query } from "react-apollo";
+import Loader from "../loader/loader"
 
 class TeamProject extends React.Component {
   constructor() {
@@ -41,15 +39,32 @@ class TeamProject extends React.Component {
 
   getUid(data) {
     if (data.project === null) {
-      return <Typography variant="caption" >Choose Project ..</Typography>;
+      return <Typography variant="caption"> Choose a project... </Typography>;
     } else {
-      return data.project.uid.map((e, i) => (
-        <TableRow key={i} style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
-          <TableCell>{i + 1}</TableCell>
-          <TableCell>{e.namalengkap}</TableCell>
-          <TableCell>{e.stream}</TableCell>
-        </TableRow>
-      ));
+      return  (
+         <Table   >
+              <TableHead>
+                <TableRow>
+                  <TableCell numeric={true} padding="dense">
+                    No
+                  </TableCell>
+                  <TableCell>Nama</TableCell>
+                  <TableCell>Stream</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.project.uid.map((e, i)  =>   (
+       <TableRow  key={i}  style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
+                  <TableCell>{i + 1}</TableCell>
+                  <TableCell>{e.namalengkap}</TableCell>
+                  <TableCell>{e.stream}</TableCell>
+                </TableRow>
+                ))}
+         
+        </TableBody>
+            </Table>
+    
+      );
     }
   }
 
@@ -63,20 +78,9 @@ class TeamProject extends React.Component {
       >
         {({ loading, data, error }) => {
           if (loading)
-            return <Typography variant="caption"> loading... </Typography>;
+             return <Loader />;
           return (
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell numeric={true} padding="dense">
-                    No
-                  </TableCell>
-                  <TableCell>Nama</TableCell>
-                  <TableCell>Stream</TableCell>
-                </TableRow>
-              </TableHead>
-              {this.getUid(data)}
-            </Table>
+           <div style={{position:"relative"}} > {this.getUid(data)} </div>
           );
         }}
       </Query>

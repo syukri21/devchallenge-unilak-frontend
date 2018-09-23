@@ -80,6 +80,18 @@ const getUidProject = gql`
   }
 `;
 
+const getDateEvent =  gql`
+{
+  events{
+    description
+    location
+    date
+  }
+}
+
+
+`;
+
 
 
 export {
@@ -90,5 +102,6 @@ export {
   getDescription,
   getOneUser,
   getUidProject,
+  getDateEvent
   
 };

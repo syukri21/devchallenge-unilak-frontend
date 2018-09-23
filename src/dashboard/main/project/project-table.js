@@ -18,7 +18,23 @@ class Tables extends React.Component {
       return <Loader />;
     } else {
       return (
-        <TableBody>
+
+              <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell numeric={true} padding="dense">
+                  No
+                </TableCell>
+                <TableCell>Nama Project</TableCell>
+                <TableCell>Unit</TableCell>
+                <TableCell>Stakeholder</TableCell>
+                <TableCell numeric={true} padding="dense">
+                  Sprint
+                </TableCell>
+                <TableCell>Status</TableCell>
+              </TableRow>
+            </TableHead>
+                    <TableBody>
           {data.projects.map((e, i) => (
             <TableRow
               key={i}
@@ -37,6 +53,9 @@ class Tables extends React.Component {
             </TableRow>
           ))}
         </TableBody>
+
+          </Table>
+
       );
     }
   }
@@ -46,23 +65,7 @@ class Tables extends React.Component {
       <Card className={classes.table}>
         <CardHeader title="Queue All Project" />
         <CardContent className={classes.contentTable}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell numeric={true} padding="dense">
-                  No
-                </TableCell>
-                <TableCell>Nama Project</TableCell>
-                <TableCell>Unit</TableCell>
-                <TableCell>Stakeholder</TableCell>
-                <TableCell numeric={true} padding="dense">
-                  Sprint
-                </TableCell>
-                <TableCell>Status</TableCell>
-              </TableRow>
-            </TableHead>
-            {this.getQueueAllProjectsDisplay()}
-          </Table>
+        {this.getQueueAllProjectsDisplay()}
         </CardContent>
       </Card>
     );

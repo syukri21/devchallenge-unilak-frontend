@@ -84,7 +84,7 @@ class BestTalentPeformance extends React.Component {
                     {e.pointqueue}
                   </TableCell>
                 </TableRow>
-              )) : <Typography variant="caption" >Choose Project</Typography>}
+              )) :  <TableRow><TableCell><Typography variant="caption" >Choose Project</Typography></TableCell></TableRow> }
             </TableBody>
           </Table>
           );

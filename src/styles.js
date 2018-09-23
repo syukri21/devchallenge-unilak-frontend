@@ -330,7 +330,8 @@ const calenderStyles = theme => ({
   calenderContainer: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
   }
 });
 

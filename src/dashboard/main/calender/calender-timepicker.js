@@ -2,10 +2,10 @@ import React from "react"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import CardHeader from "@material-ui/core/CardHeader"
-import Calendar from "react-calendar"
 import TextField from "@material-ui/core/TextField"
 import moment from "moment";
-
+import Calendar from "react-calendar";
+import CalendarEvent from "./calendar-event.js";
 class Timepicker extends React.Component {
 
 
@@ -55,12 +55,7 @@ class Timepicker extends React.Component {
 				    /> 
 				</CardContent>
 				<CardContent className={classes.calenderContainer} >
-					<Calendar 
-						activeStartDate = {moment(this.state.date).toDate()}
-						value = {this.state.data}
-						onChange = {e => this.onChange(e)}
-
-					/>
+					<CalendarEvent  onChange={this.onChange}  date={this.state.date} />
 				</CardContent>
 			</Card>
 		);
