@@ -34,7 +34,7 @@ class Team extends React.Component {
 		const {classes} = this.props
 		return(
 			<div className={classes.grid}>
-				<TeamProject classes={classes}  getUid={(e) => this.getUid(e)} />
+				<TeamProject classes={classes}  getUid={(e) => this.getUid(e)}  displayMember={(e, nama) => this.displayMember(e, nama)} />
 				<BestTalentPeformance classes={classes} passUid={this.state.data}  displayMember={(e, nama) => this.displayMember(e, nama)} />	
 				<TeamMemberDescription open={this.state.open}   handleClose={() => {this.setState({open: false});}} user={this.state.nama} />			
 			</div>

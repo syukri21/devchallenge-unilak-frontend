@@ -22,24 +22,18 @@ constructor(){
   }
 }
   
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      open: nextProps.openState.open,
-    });
-  }
+ 
 
 
   handleDisAgree(){
-    this.setState({
-      open: false
-    });
+    this.props.handleNote(false);
   }
 
 
   render() {
     return (
       <Dialog
-        open={this.state.open}
+        open={this.props.openState.open}
         onClose={this.handleClose}
         aria-labelledby="Note"
         aria-describedby="Event Schedule"

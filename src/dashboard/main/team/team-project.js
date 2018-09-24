@@ -16,7 +16,8 @@ import {
 import TeamSelectDropdown from "./team-select-dropdown";
 import TeamDescription from "./team-description";
 import { Query } from "react-apollo";
-import Loader from "../loader/loader"
+import Loader from "../loader/loader";
+import Button from "@material-ui/core/Button"
 
 class TeamProject extends React.Component {
   constructor() {
@@ -56,7 +57,7 @@ class TeamProject extends React.Component {
                 {data.project.uid.map((e, i)  =>   (
        <TableRow  key={i}  style={{ background: i % 2 === 0 ? "lightskyblue" : null }}>
                   <TableCell>{i + 1}</TableCell>
-                  <TableCell>{e.namalengkap}</TableCell>
+                  <TableCell><Button onClick={() => this.props.displayMember(true, e.user)} size="small" fullWidth  >{e.namalengkap}</Button></TableCell>
                   <TableCell>{e.stream}</TableCell>
                 </TableRow>
                 ))}

@@ -110,15 +110,19 @@ class TeamMemberDescription extends React.Component{
       							<Grid item xs={8} ><Typography varian="subheading" >{data.user.level}</Typography></Grid>
       						</Grid>
       					</Grid>
-                <Grid container>
+                <Grid container  alignItems="center" >
                   <Grid item xs={8} >
                     <Bar
                       data={this.state.chartset(data.user.pointburn, data.user.pointremain, data.user.pointqueue)}
                       options={{maintainAspectRatio: false}}
                       displayTitle={false} />
                   </Grid>
+                  <Grid item xs={4}  >
+                  <Typography variant="caption"  align="center" >Total Point</Typography>
+                  <Typography varian="heading" align="center" >{data.user.totalpoint}</Typography>
+                  </Grid>   
                 </Grid>
-                <Grid container justify="center" >
+                <Grid container justify="center"  style={{padding: "20px"}} >
 			          <Button onClick={() => this.handleDisAgree()} color="primary">
 			            Back
 			          </Button>

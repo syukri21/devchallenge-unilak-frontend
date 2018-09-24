@@ -26,6 +26,10 @@ class Schedule extends React.Component {
   }
 
   handleNote(e) {
+
+    this.setState({
+      open: e
+    })
  
   }
 
@@ -136,7 +140,7 @@ class Schedule extends React.Component {
           </Typography>
           {this.displayEventSchedule(classes)}
         </CardContent>
-        <CalenderSubmitDialog openState={this.state} />
+        <CalenderSubmitDialog openState={this.state} handleNote={(e)=>this.handleNote(e)}/>
       </Card>
     );
   }
