@@ -73,7 +73,7 @@ class BestTalentPeformance extends React.Component {
                   <TableCell numeric={true} padding="dense">
                     {i + 1}
                   </TableCell>
-                  <TableCell><Button onClick={() => this.props.displayMember(true)} size="small" >{e.namalengkap}</Button></TableCell>
+                  <TableCell><Button onClick={() => this.props.displayMember(true, e.user)} size="small" >{e.namalengkap}</Button></TableCell>
                   <TableCell>{e.stream}</TableCell>
                   <TableCell numeric={true} padding="dense">
                     {e.pointburn}

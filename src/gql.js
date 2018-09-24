@@ -62,6 +62,15 @@ const getOneUser = gql`
     user(user: $id) {
       namalengkap
       stream
+      level
+      rating
+      pointburn
+      pointqueue
+      pointremain
+      totalpoint
+      uid {
+        projectnama
+      }
     }
   }
 `;
@@ -70,6 +79,7 @@ const getUidProject = gql`
   query user($id: String) {
     project(project: $id) {
       uid {
+        user
         namalengkap
         stream
         pointburn

@@ -12,14 +12,15 @@ class Team extends React.Component {
 		super()
 		this.state = {
 			data : null,
-			oper: false
+			open: false
 		}
 		this.getUid = this.getUid.bind(this)
 	}
 
-	displayMember(e){
+	displayMember(e, nama){
 		this.setState({
-			open: e
+			open: e,
+			nama: nama
 		});
 	}
 
@@ -34,8 +35,8 @@ class Team extends React.Component {
 		return(
 			<div className={classes.grid}>
 				<TeamProject classes={classes}  getUid={(e) => this.getUid(e)} />
-				<BestTalentPeformance classes={classes} passUid={this.state.data}  displayMember={(e) => this.displayMember(e)} />	
-				<TeamMemberDescription open={this.state.open} />			
+				<BestTalentPeformance classes={classes} passUid={this.state.data}  displayMember={(e, nama) => this.displayMember(e, nama)} />	
+				<TeamMemberDescription open={this.state.open}   handleClose={() => {this.setState({open: false});}} user={this.state.nama} />			
 			</div>
 		);
 	}

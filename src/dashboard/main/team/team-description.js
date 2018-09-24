@@ -5,7 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { getDescription } from "../../../gql";
 import { Query } from "react-apollo";
-
+import moment from "moment";
 
 class TeamDescription extends React.Component {
   state = {
@@ -68,7 +68,7 @@ class TeamDescription extends React.Component {
                     {" "}
                     {!loading &&
                       data.project != null &&
-                      data.project.stardate}{" "}
+                      moment(data.project.stardate).format("DD MMMM YYYY").toString()}{" "}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -80,7 +80,7 @@ class TeamDescription extends React.Component {
                     {" "}
                     {!loading &&
                       data.project != null &&
-                      data.project.enddate}{" "}
+                      moment(data.project.enddate).format("DD MMMM YYYY").toString()}{" "}
                   </TableCell>
                 </TableRow>
               </TableBody>
